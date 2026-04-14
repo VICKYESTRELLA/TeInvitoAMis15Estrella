@@ -124,7 +124,7 @@ body {
 	left: 4em;
 }
 
-.div_nombre_mavi {
+.div_nombre_estrella {
 	width: 100%;
 	top: 0;
 	height: calc(12% + 8vw);
@@ -144,7 +144,7 @@ body {
 	opacity: 0;
 }
 
-.mask_mavi {
+.mask_estrella {
 	fill: none;
 	stroke: #fff;
 	stroke-width: 40;
@@ -156,13 +156,13 @@ body {
 	stroke-dasharray: 6000;
 	stroke-dashoffset: 6000;
 
-	-webkit-animation: animate-mavi 3.5s calc(9.3s - var(--time-chrome)) ease-in
+	-webkit-animation: animate-estrella 3.5s calc(9.3s - var(--time-chrome)) ease-in
 		forwards;
-	-o-animation: animate-mavi 3.5s calc(9.3s - var(--time-chrome)) ease-in
+	-o-animation: animate-estrella 3.5s calc(9.3s - var(--time-chrome)) ease-in
 		forwards;
-	-moz-animation: animate-mavi 3.5s calc(9.3s - var(--time-chrome)) ease-in
+	-moz-animation: animate-estrella 3.5s calc(9.3s - var(--time-chrome)) ease-in
 		forwards;
-	animation: animate-mavi 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
+	animation: animate-estrella 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
 }
 
 .write2 {
@@ -170,21 +170,27 @@ body {
 	stroke-dashoffset: 6000;
 
 	/* 2.5s de diferencia */
-	-webkit-animation: animate-mavi 4.5s calc(11.8s - var(--time-chrome)) ease-out
+	-webkit-animation: animate-estrella 4.5s calc(11.8s - var(--time-chrome)) ease-out
 		forwards;
-	-o-animation: animate-mavi 4.5s calc(11.8s - var(--time-chrome)) ease-out
+	-o-animation: animate-estrella 4.5s calc(11.8s - var(--time-chrome)) ease-out
 		forwards;
-	-moz-animation: animate-mavi 4.5s calc(11.8s - var(--time-chrome)) ease-out
+	-moz-animation: animate-estrella 4.5s calc(11.8s - var(--time-chrome)) ease-out
 		forwards;
-	animation: animate-mavi 4.5s calc(11.8s - var(--time-chrome)) ease-out
+	animation: animate-estrella 4.5s calc(11.8s - var(--time-chrome)) ease-out
 		forwards;
 }
 
-#mavi_white {
+#estrella_white {
 	fill: #ffffff;
+	opacity: 0;
+
+	-webkit-animation: appear 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
+	-o-animation: appear 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
+	-moz-animation: appear 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
+	animation: appear 3.5s calc(9.3s - var(--time-chrome)) ease-in forwards;
 }
 
-#mavi_gold {
+#estrella_gold {
 	fill: var(--gold);
 	opacity: 0;
 }
@@ -506,7 +512,7 @@ a.active {
 	}
 }
 
-@keyframes animate-mavi {
+@keyframes animate-estrella {
 	to {
 		stroke-dashoffset: 0;
 	}

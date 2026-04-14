@@ -92,7 +92,7 @@ confetti();
 let windowHeight = window.innerHeight;
 let windowHeight2 = $(window).height();
 
-var $mavi_gold = $("#mavi_gold");
+var $estrella_gold = $("#estrella_gold");
 var $mis_quince_gold = $("#mis_quince_gold");
 var $mis_quince_gray = $("#mis_quince_gray");
 var $marco_gold = $("#marco_gold");
@@ -114,7 +114,7 @@ window.onscroll = function () {
 
 	// console.log("Letter: " + letter_num);
 	if (window.scrollY < 300) {
-		$mavi_gold.css("opacity", 1 - letter_num);
+		$estrella_gold.css("opacity", 1 - letter_num);
 
 		$mis_quince_gold.css("opacity", letter_num);
 
