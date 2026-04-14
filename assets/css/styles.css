@@ -144,14 +144,6 @@ body {
 	opacity: 0;
 }
 
-.mask_estrella {
-	fill: none;
-	stroke: #fff;
-	stroke-width: 40;
-	stroke-linejoin: round;
-	stroke-linecap: round;
-}
-
 .write1 {
 	stroke-dasharray: 6000;
 	stroke-dashoffset: 6000;
