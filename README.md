@@ -13,7 +13,7 @@ Configuración en `index.html`:
 ```html
 window.DRIVE_ALBUM_CONFIG = {
 	uploadFormUrl: "https://forms.gle/YOUR-FORM-ID",
-	feedUrl: "", // URL pública JSON con fotos (opción recomendada)
+	feedUrl: "", // URL pública JSON con fotos (opción recomendada: evita exponer apiKey)
 	folderId: "", // opcional, usar junto con apiKey
 	apiKey: "", // opcional, API key de Google Drive
 	thumbnailSize: "w1000", // opcional, tamaño miniatura Google Drive

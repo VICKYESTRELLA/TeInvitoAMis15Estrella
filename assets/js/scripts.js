@@ -227,13 +227,22 @@ $(function () {
 		return;
 	}
 
-	var uploadButton = $("#form-upload-button");
-	if (uploadButton.length && config.uploadFormUrl) {
-		uploadButton.attr("href", config.uploadFormUrl);
-	}
-
 	function setStatus(message) {
 		statusNode.textContent = message;
+	}
+
+	function isSafeHttpUrl(value) {
+		try {
+			var parsed = new URL(value, window.location.href);
+			return parsed.protocol === "https:" || parsed.protocol === "http:";
+		} catch (e) {
+			return false;
+		}
+	}
+
+	var uploadButton = $("#form-upload-button");
+	if (uploadButton.length && config.uploadFormUrl && isSafeHttpUrl(config.uploadFormUrl)) {
+		uploadButton.attr("href", config.uploadFormUrl);
 	}
 
 	function renderPhotos(items) {
@@ -333,7 +342,11 @@ $(function () {
 				var photos = files.map(function (file) {
 					return {
 						name: file.name,
-						imageUrl: "https://drive.google.com/thumbnail?id=" + file.id + "&sz=" + thumbnailSize,
+						imageUrl:
+							"https://drive.google.com/thumbnail?id=" +
+							encodeURIComponent(file.id) +
+							"&sz=" +
+							encodeURIComponent(thumbnailSize),
 						fullUrl: file.webViewLink || "https://drive.google.com/file/d/" + file.id + "/view",
 					};
 				});
