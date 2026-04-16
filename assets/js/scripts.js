@@ -227,7 +227,7 @@ $(function () {
 		return;
 	}
 
-	var uploadButton = $("#drive-upload-button");
+	var uploadButton = $("#form-upload-button");
 	if (uploadButton.length && config.uploadFormUrl) {
 		uploadButton.attr("href", config.uploadFormUrl);
 	}
@@ -261,7 +261,7 @@ $(function () {
 			link.href = fullUrl;
 			link.target = "_blank";
 			link.rel = "noopener noreferrer";
-			link.setAttribute("data-fancybox", "drive-images");
+			link.setAttribute("data-fancybox", "images");
 
 			var img = document.createElement("img");
 			img.className = "img-fluid";
@@ -305,13 +305,14 @@ $(function () {
 				renderPhotos(normalizeFeed(data));
 			})
 			.fail(function () {
-				setStatus("No se pudo cargar el álbum público de Google Drive.");
+				setStatus("No se pudo cargar el álbum de fotos.");
 			});
 	}
 
 	function fetchFromDriveApi() {
 		var safeFolderId = String(config.folderId || "").replace(/[^a-zA-Z0-9_-]/g, "");
-		if (!safeFolderId) {
+		var folderIdIsValid = /^[a-zA-Z0-9_-]{20,80}$/.test(safeFolderId);
+		if (!folderIdIsValid) {
 			setStatus("Falta configurar una carpeta válida de Google Drive.");
 			return;
 		}
