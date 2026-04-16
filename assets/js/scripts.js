@@ -234,7 +234,7 @@ $(function () {
 	function isSafeHttpUrl(value) {
 		try {
 			var parsed = new URL(value, window.location.href);
-			return parsed.protocol === "https:" || parsed.protocol === "http:";
+			return parsed.protocol === "https:";
 		} catch (e) {
 			return false;
 		}
