@@ -216,3 +216,133 @@ $(function () {
 	// 	Modernizr.passiveeventlisteners ? { passive: true } : false
 	// );
 });
+
+////  Álbum colaborativo de Google Drive
+(function () {
+	var config = window.DRIVE_ALBUM_CONFIG || {};
+	var statusNode = document.getElementById("drive-album-status");
+	var gridNode = document.getElementById("drive-album-grid");
+
+	if (!statusNode || !gridNode) {
+		return;
+	}
+
+	var uploadButton = $('section#4 .espacio_btn a');
+	if (uploadButton.length && config.uploadFormUrl) {
+		uploadButton.attr("href", config.uploadFormUrl);
+	}
+
+	function setStatus(message) {
+		statusNode.textContent = message;
+	}
+
+	function renderPhotos(items) {
+		gridNode.innerHTML = "";
+
+		if (!items || !items.length) {
+			setStatus("Todavía no hay fotos publicadas.");
+			return;
+		}
+
+		setStatus("Fotos publicadas por los invitados:");
+
+		items.forEach(function (item) {
+			var imageUrl = item.imageUrl || item.thumbnailUrl || item.url;
+			var fullUrl = item.fullUrl || imageUrl;
+
+			if (!imageUrl || !fullUrl) {
+				return;
+			}
+
+			var card = document.createElement("div");
+			card.className = "col-6 col-md-3 item-galeria";
+
+			var link = document.createElement("a");
+			link.href = fullUrl;
+			link.target = "_blank";
+			link.rel = "noopener noreferrer";
+			link.setAttribute("data-fancybox", "drive-images");
+
+			var img = document.createElement("img");
+			img.className = "img-fluid";
+			img.src = imageUrl;
+			img.alt = item.name || "Foto del álbum";
+
+			link.appendChild(img);
+			card.appendChild(link);
+			gridNode.appendChild(card);
+		});
+	}
+
+	function normalizeFeed(data) {
+		var source = [];
+
+		if (Array.isArray(data)) {
+			source = data;
+		} else if (Array.isArray(data.photos)) {
+			source = data.photos;
+		} else if (Array.isArray(data.items)) {
+			source = data.items;
+		} else if (Array.isArray(data.files)) {
+			source = data.files;
+		}
+
+		return source.map(function (item) {
+			if (typeof item === "string") {
+				return { imageUrl: item, fullUrl: item };
+			}
+			return {
+				name: item.name || "",
+				imageUrl: item.imageUrl || item.thumbnailUrl || item.url || "",
+				fullUrl: item.fullUrl || item.webViewLink || item.url || "",
+			};
+		});
+	}
+
+	function fetchFromFeed() {
+		$.getJSON(config.feedUrl)
+			.done(function (data) {
+				renderPhotos(normalizeFeed(data));
+			})
+			.fail(function () {
+				setStatus("No se pudo cargar el álbum público de Google Drive.");
+			});
+	}
+
+	function fetchFromDriveApi() {
+		var query = "'" + config.folderId + "' in parents and mimeType contains 'image/' and trashed = false";
+		var endpoint =
+			"https://www.googleapis.com/drive/v3/files?q=" +
+			encodeURIComponent(query) +
+			"&fields=" +
+			encodeURIComponent("files(id,name,webViewLink)") +
+			"&orderBy=createdTime desc&key=" +
+			encodeURIComponent(config.apiKey);
+
+		$.getJSON(endpoint)
+			.done(function (data) {
+				var files = (data && data.files) || [];
+				var photos = files.map(function (file) {
+					return {
+						name: file.name,
+						imageUrl: "https://drive.google.com/thumbnail?id=" + file.id + "&sz=w1000",
+						fullUrl: file.webViewLink || "https://drive.google.com/file/d/" + file.id + "/view",
+					};
+				});
+				renderPhotos(photos);
+			})
+			.fail(function () {
+				setStatus("No se pudo cargar el álbum desde la API de Google Drive.");
+			});
+	}
+
+	if (config.feedUrl) {
+		fetchFromFeed();
+		return;
+	}
+
+	if (config.folderId && config.apiKey) {
+		fetchFromDriveApi();
+		return;
+	}
+})();

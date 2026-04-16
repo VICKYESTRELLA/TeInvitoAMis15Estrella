@@ -309,18 +309,24 @@
 						</section>
 						<section id="4">
 							<div class="line"></div>
-							<header>#15estrella</header>
+							<header>Álbum colaborativo</header>
 							<p>
-								¡¡ Preparate para esta gran fiesta !! <br />
-								Usá el Hashtag de la fiesta en tus fotos o videos.
+								Subí tu foto al formulario y aparecerá en el álbum público.
 							</p>
 							<div class="espacio_btn">
 								<a
 									target="_blank"
-									href="https://www.instagram.com/explore/tags/15estrella/"
+									href="https://forms.gle/nJdC5uczwBJnNscy5"
 									class="btn btn-alt"
-									>Ver fotos instagram</a
+									>Sube tu fotografía</a
 								>
+							</div>
+							<div class="container">
+								<p id="drive-album-status" class="drive-album-status">
+									Configurá el enlace del álbum de Google Drive para mostrar las
+									fotos aquí.
+								</p>
+								<div id="drive-album-grid" class="row"></div>
 							</div>
 						</section>
 						<section id="5">
@@ -370,6 +376,14 @@
 			type="text/javascript"
 			src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
 		></script>
+		<script type="text/javascript">
+			window.DRIVE_ALBUM_CONFIG = {
+				uploadFormUrl: "https://forms.gle/nJdC5uczwBJnNscy5",
+				feedUrl: "",
+				folderId: "",
+				apiKey: "",
+			};
+		</script>
 		<script type="text/javascript" src="assets/js/scripts.js"></script>
 		<script
 			type="text/javascript"

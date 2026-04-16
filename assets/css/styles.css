@@ -363,6 +363,16 @@ section.galeria .item-galeria {
 	margin-bottom: 3%;
 }
 
+.drive-album-status {
+	flex: none;
+	font-size: min(2.6vw, 18px);
+	margin: 0 0 14px;
+}
+
+#drive-album-grid {
+	justify-content: center;
+}
+
 .col-6 {
 	flex: 0 0 50%;
 	max-width: 47%;
