@@ -227,7 +227,7 @@ $(function () {
 		return;
 	}
 
-	var uploadButton = $('section#4 .espacio_btn a');
+	var uploadButton = $("#drive-upload-button");
 	if (uploadButton.length && config.uploadFormUrl) {
 		uploadButton.attr("href", config.uploadFormUrl);
 	}
@@ -310,7 +310,14 @@ $(function () {
 	}
 
 	function fetchFromDriveApi() {
-		var query = "'" + config.folderId + "' in parents and mimeType contains 'image/' and trashed = false";
+		var safeFolderId = String(config.folderId || "").replace(/[^a-zA-Z0-9_-]/g, "");
+		if (!safeFolderId) {
+			setStatus("Falta configurar una carpeta válida de Google Drive.");
+			return;
+		}
+
+		var thumbnailSize = String(config.thumbnailSize || "w1000");
+		var query = "'" + safeFolderId + "' in parents and mimeType contains 'image/' and trashed = false";
 		var endpoint =
 			"https://www.googleapis.com/drive/v3/files?q=" +
 			encodeURIComponent(query) +
@@ -325,7 +332,7 @@ $(function () {
 				var photos = files.map(function (file) {
 					return {
 						name: file.name,
-						imageUrl: "https://drive.google.com/thumbnail?id=" + file.id + "&sz=w1000",
+						imageUrl: "https://drive.google.com/thumbnail?id=" + file.id + "&sz=" + thumbnailSize,
 						fullUrl: file.webViewLink || "https://drive.google.com/file/d/" + file.id + "/view",
 					};
 				});

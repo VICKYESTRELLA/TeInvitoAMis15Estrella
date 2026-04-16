@@ -16,5 +16,6 @@ window.DRIVE_ALBUM_CONFIG = {
 	feedUrl: "", // URL pública JSON con fotos (opción recomendada)
 	folderId: "", // opcional, usar junto con apiKey
 	apiKey: "", // opcional, API key de Google Drive
+	thumbnailSize: "w1000", // opcional, tamaño miniatura Google Drive
 };
 ```
