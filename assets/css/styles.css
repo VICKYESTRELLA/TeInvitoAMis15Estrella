@@ -1,6 +1,6 @@
 :root {
 	--white_envelope: #f3f4f5;
-	--gold_envelope: url(../img/gold_texture.png) #e3ca6f;
+	--gold_envelope: url(../img/gold_texture.png?v=20260422) #e3ca6f;
 	--white_paper_up: #f2f2f2;
 	--gray: #a5a5a5;
 	--gold: #e1b100;
@@ -52,7 +52,7 @@ body {
 	top: 0;
 	left: 0;
 	background-color: var(--white_paper_up);
-	background-image: url(../img/galeria/2.jpg);
+	background-image: url(../img/galeria/2.jpg?v=20260422);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -74,7 +74,7 @@ body {
 @media (min-width: 800px) {
 	.imgPortada {
 		background-color: var(--white_paper_up);
-		background-image: url(../img/galeria/4.jpg);
+		background-image: url(../img/galeria/4.jpg?v=20260422);
 		background-position: center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
